@@ -31,6 +31,8 @@ if ($_SESSION['login'] === true) {
   <link href="../../assets/admin/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/admin/css/styles.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
+
   <!--Icons-->
   <script src="../../assets/admin/js/lumino.glyphs.js"></script>
 
@@ -62,7 +64,7 @@ if ($_SESSION['login'] === true) {
       <div class=" col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <table class="table table-bordered">
+            <table id="tb_pengguna" class="table table-bordered">
               <thead>
                 <tr>
                   <th class="col-sm-.5 text-center" scope="col">No</th>
@@ -77,30 +79,30 @@ if ($_SESSION['login'] === true) {
                   <th class="col-sm-1 text-center" scope="col">Bergabung Sejak</th>
                 </tr>
               </thead>
-              <?php
-              $i = 1;
-              $pengguna = query("SELECT * FROM pengguna");
+              <tbody>
+                <?php
+                  $i = 1;
+                  $pengguna = query("SELECT * FROM pengguna");
 
-              foreach ($pengguna as $data_pengguna) {
-                echo "
-                <tbody>
-                  <tr>
-                    <th class=\"col-sm-.5 text-center\" scope=\"row\">" . $i . "</th>
-                    <td class=\"col-sm-1.5 text-center\">" . $data_pengguna["kd_pengguna"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["nama"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["username"] . "</td>
-                    <td class=\"col-sm-2 text-center\">" . $data_pengguna["tempat_lahir"] . ", " . date('j F Y', strtotime($data_pengguna["tanggal_lahir"])) . "</td>
-                    <td class=\"col-sm-2 text-center\">" . $data_pengguna["alamat"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["jenis_kelamin"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["no_telepon"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["email"] . "</td>
-                    <td class=\"col-sm-1 text-center\">" . $data_pengguna["bergabung_sejak"] . "</td>
-                  </tr>
-                </tbody>
-                ";
-                $i++;
-              }
-              ?>
+                  foreach ($pengguna as $data_pengguna) {
+                    echo "
+                      <tr>
+                        <th class=\"col-sm-.5 text-center\" scope=\"row\">" . $i . "</th>
+                        <td class=\"col-sm-1.5 text-center\">" . $data_pengguna["kd_pengguna"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["nama"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["username"] . "</td>
+                        <td class=\"col-sm-2 text-center\">" . $data_pengguna["tempat_lahir"] . ", " . date('j F Y', strtotime($data_pengguna["tanggal_lahir"])) . "</td>
+                        <td class=\"col-sm-2 text-center\">" . $data_pengguna["alamat"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["jenis_kelamin"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["no_telepon"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["email"] . "</td>
+                        <td class=\"col-sm-1 text-center\">" . $data_pengguna["bergabung_sejak"] . "</td>
+                      </tr>
+                      ";
+                    $i++;
+                  }
+                ?>
+              </tbody>
             </table>
           </div>
         </div>
@@ -111,6 +113,14 @@ if ($_SESSION['login'] === true) {
 
   <script src="../../assets/admin/js/jquery-1.11.1.min.js"></script>
   <script src="../../assets/admin/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready( function () {
+        $('#tb_pengguna').DataTable();
+    } );
+  </script>
 
 </body>
 

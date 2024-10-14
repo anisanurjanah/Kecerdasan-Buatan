@@ -31,6 +31,8 @@ if ($_SESSION['login'] === true) {
   <link href="../../assets/admin/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/admin/css/styles.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
+
   <!--Icons-->
   <script src="../../assets/admin/js/lumino.glyphs.js"></script>
 
@@ -65,7 +67,7 @@ if ($_SESSION['login'] === true) {
             <a href="tambah-penyakit.php" class="btn btn-primary mb-4">Tambah Data</a>
           </div>
           <div class="panel-body">
-            <table class="table table-bordered">
+            <table id="tb_penyakit" class="table table-bordered">
               <thead>
                 <tr>
                   <th class="text-center" scope="col">No</th>
@@ -74,27 +76,27 @@ if ($_SESSION['login'] === true) {
                   <th class="text-center" scope="col">Nama Penyakit</th>
                 </tr>
               </thead>
-              <?php
-              $i = 1;
-              $penyakit = query("SELECT * FROM penyakit");
+              <tbody>
+                <?php
+                  $i = 1;
+                  $penyakit = query("SELECT * FROM penyakit");
 
-              foreach ($penyakit as $data_penyakit) {
-                echo "
-                <tbody>
-                  <tr>
-                    <th class=\"col-md-.5 text-center\" scope=\"row\">" . $i . "</th>
-                    <td class=\"col-md-1.5 text-center\">
-                      <a href=\"ubah-penyakit.php?kd_penyakit=" . $data_penyakit['kd_penyakit'] . "\" class=\"btn btn-success btn-sm\">Ubah</a> |
-                      <a href=\"hapus-penyakit.php?kd_penyakit=" . $data_penyakit['kd_penyakit'] . "\" class=\"btn btn-danger btn-sm\">Hapus</a>
-                    </td>
-                    <td class=\"col-md-5 text-center\">" . $data_penyakit["kd_penyakit"] . "</td>
-                    <td class=\"col-md-5 text-center\">" . $data_penyakit["nama_penyakit"] . "</td>
-                  </tr>
-                </tbody>
-                ";
-                $i++;
-              }
-              ?>
+                  foreach ($penyakit as $data_penyakit) {
+                    echo "
+                    <tr>
+                      <th class=\"col-md-.5 text-center\" scope=\"row\">" . $i . "</th>
+                      <td class=\"col-md-1.5 text-center\">
+                        <a href=\"ubah-penyakit.php?kd_penyakit=" . $data_penyakit['kd_penyakit'] . "\" class=\"btn btn-success btn-sm\">Ubah</a> |
+                        <a href=\"hapus-penyakit.php?kd_penyakit=" . $data_penyakit['kd_penyakit'] . "\" class=\"btn btn-danger btn-sm\">Hapus</a>
+                      </td>
+                      <td class=\"col-md-5 text-center\">" . $data_penyakit["kd_penyakit"] . "</td>
+                      <td class=\"col-md-5 text-center\">" . $data_penyakit["nama_penyakit"] . "</td>
+                    </tr>
+                    ";
+                    $i++;
+                  }
+                ?>
+              </tbody>
             </table>
           </div>
         </div>
@@ -105,6 +107,41 @@ if ($_SESSION['login'] === true) {
 
   <script src="../../assets/admin/js/jquery-1.11.1.min.js"></script>
   <script src="../../assets/admin/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready( function () {
+        $('#tb_penyakit').DataTable();
+    } );
+  //   $(function() {
+  //     $('#ssptable1').DataTable({
+  //         "aLengthMenu":[[10,25,50,100,250,500,1000,5000],[10,25,50,100,250,500,1000,5000]],
+  //         "responsive" : false,
+  //         "processing": true,
+  //         "serverSide": true,
+  //         "searching":true,
+  //         "bFilter":false,
+  //         "bFalse":false,
+  //         "bSort":true,
+  //         "order": [[0, 'asc']], // Set default column index (5) and direction (desc)
+  //         "ajax":{
+  //           "url": "<?//= $base_url; ?>exe/file.php",
+  //           "dataType": "json",
+  //           "type": "POST",
+  //           "data": function(d) {
+  //             d.filterkaryawan = "<?//= $filterkaryawan ?>";
+  //           }
+  //         },
+  //         "columns": [
+  //           { "data": "No" },
+  //           { "data": "Aksi" },
+  //           { "data": "Kode Penyakit" },
+  //           { "data": "Nama Penyakit" },
+  //         ]
+  //     });
+  // });
+  </script>
 
 </body>
 

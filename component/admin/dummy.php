@@ -22,7 +22,7 @@ if ($_SESSION['login'] === true) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin - Data Gejala</title>
+  <title>Admin - Dummy</title>
 
   <!-- Favicons -->
   <link href="../../assets/user/img/favicon.png" rel="icon">
@@ -50,13 +50,13 @@ if ($_SESSION['login'] === true) {
         <li><a href="dashboard.php"><svg class="glyph stroked home">
               <use xlink:href="#stroked-home"></use>
             </svg></a></li>
-        <li class="active">Data Gejala</li>
+        <li class="active">Dummy</li>
       </ol>
     </div><!--/.row-->
 
     <div class="row">
       <div class="col-lg-12">
-        <h1 class="page-header">Data Gejala</h1>
+        <h1 class="page-header">Dummy</h1>
       </div>
     </div><!--/.row-->
 
@@ -67,36 +67,15 @@ if ($_SESSION['login'] === true) {
             <a href="tambah-gejala.php" class="btn btn-primary mb-4">Tambah Data</a>
           </div>
           <div class="panel-body">
-            <table id="tb_gejala" class="table table-bordered">
+            <table id="ssptable3" class="table table-bordered">
               <thead>
                 <tr>
                   <th class="text-center" scope="col">No</th>
                   <th class="text-center" scope="col">Aksi</th>
-                  <th class="text-center" scope="col">Kode Gejala</th>
-                  <th class="text-center" scope="col">Nama Gejala</th>
+                  <th class="text-center" scope="col">ID</th>
+                  <th class="text-center" scope="col">Nama</th>
                 </tr>
               </thead>
-              <tbody>
-                <?php
-                  $i = 1;
-                  $gejala = query("SELECT * FROM gejala");
-
-                  foreach ($gejala as $data_gejala) {
-                    echo "
-                      <tr>
-                        <th scope=\"row\" class=\"col-md-.5 text-center\">" . $i . "</th>
-                        <td class=\"col-md-1.5 text-center\">
-                          <a href=\"ubah-gejala.php?kd_gejala=" . $data_gejala['kd_gejala'] . "\" class=\"btn btn-success btn-sm\">Ubah</a> |
-                          <a href=\"hapus-gejala.php?kd_gejala=" . $data_gejala['kd_gejala'] . "\" class=\"btn btn-danger btn-sm\">Hapus</a>
-                        </td>
-                        <td class=\"col-md-2 text-center\">" . $data_gejala["kd_gejala"] . "</td>
-                        <td class=\"col-md-8\">" . $data_gejala["nama_gejala"] . "</td>
-                      </tr>
-                    ";
-                    $i++;
-                  }
-                ?>
-              </tbody>
             </table>
           </div>
         </div>
@@ -111,9 +90,35 @@ if ($_SESSION['login'] === true) {
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
 
   <script>
-    $(document).ready( function () {
-        $('#tb_gejala').DataTable();
-    } );
+    // $(document).ready( function () {
+    //     $('#ssptable3').DataTable();
+    // } );
+
+    $(function() {
+      $('#ssptable3').DataTable({
+          "aLengthMenu":[[10,25,50,100,250,500,1000,5000],[10,25,50,100,250,500,1000,5000]],
+          "responsive" : false,
+          "processing": true,
+          "serverSide": true,
+          "searching":true,
+          "bFilter":false,
+          "bFalse":false,
+          "bSort":true,
+          "order": [[0, 'asc']], // Set default column index (5) and direction (desc)
+          "ajax":{
+            "url": "dummy2.php",
+            "dataType": "json",
+            "type": "POST",
+            "data": function(d) {}
+          },
+          "columns": [
+            { "data": "No" },
+            { "data": "Aksi" },
+            { "data": "ID" },
+            { "data": "Nama" },
+          ]
+      });
+  });
   </script>
 
 </body>
