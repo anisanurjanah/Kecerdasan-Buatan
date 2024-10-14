@@ -31,6 +31,8 @@ require '../functions.php';
   <!-- Template Main CSS File -->
   <link href="../../assets/user/css/style.css" rel="stylesheet">
 
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">  
+
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -83,7 +85,7 @@ require '../functions.php';
                   <div class="card-body">
 
                     <!-- Default Table -->
-                    <table class="table mt-4">
+                    <table id="tb_info_penyakit" class="table mt-4">
                       <thead class="table-primary">
                         <tr class="text-center">
                           <th scope="col">No</th>
@@ -91,23 +93,23 @@ require '../functions.php';
                           <th scope="col">Nama Penyakit</th>
                         </tr>
                       </thead>
-                      <?php
-                      $i = 1;
-                      $penyakit = query("SELECT * FROM penyakit");
+                      <tbody>
+                        <?php
+                          $i = 1;
+                          $penyakit = query("SELECT * FROM penyakit");
 
-                      foreach ($penyakit as $data_penyakit) {
-                        echo "
-                          <tbody>
-                            <tr class=\"text-center\">
-                              <th class=\"col-md-2 text-center\" scope=\"row\">" . $i . "</th>
-                              <td class=\"col-md-5\">" . $data_penyakit["kd_penyakit"] . "</td>
-                              <td class=\"col-md-5\">" . $data_penyakit["nama_penyakit"] . "</td>
-                            </tr>
-                          </tbody>
-                          ";
-                        $i++;
-                      }
-                      ?>
+                          foreach ($penyakit as $data_penyakit) {
+                            echo "
+                                <tr class=\"text-center\">
+                                  <th class=\"col-md-2 text-center\" scope=\"row\">" . $i . "</th>
+                                  <td class=\"col-md-5\">" . $data_penyakit["kd_penyakit"] . "</td>
+                                  <td class=\"col-md-5\">" . $data_penyakit["nama_penyakit"] . "</td>
+                                </tr>
+                                ";
+                            $i++;
+                          }
+                        ?>
+                      </tbody>
                     </table>
                     <!-- End Default Table Example -->
                   </div>
@@ -119,7 +121,7 @@ require '../functions.php';
                   <div class="card-body">
 
                     <!-- Default Table -->
-                    <table class="table mt-4">
+                    <table id="tb_info_gejala" class="table mt-4">
                       <thead class="table-primary">
                         <tr class="text-center">
                           <th scope="col">No</th>
@@ -127,23 +129,23 @@ require '../functions.php';
                           <th scope="col">Nama Gejala</th>
                         </tr>
                       </thead>
-                      <?php
-                      $i = 1;
-                      $gejala = query("SELECT * FROM gejala");
+                      <tbody>
+                        <?php
+                          $i = 1;
+                          $gejala = query("SELECT * FROM gejala");
 
-                      foreach ($gejala as $data_gejala) {
-                        echo "
-                          <tbody>
-                            <tr>
-                              <th class=\"col-md-2 text-center\" scope=\"row\">" . $i . "</th>
-                              <td class=\"col-md-5 text-center\">" . $data_gejala["kd_gejala"] . "</td>
-                              <td class=\"col-md-5\">" . $data_gejala["nama_gejala"] . "</td>
-                            </tr>
-                        </tbody>
-                          ";
-                        $i++;
-                      }
-                      ?>
+                          foreach ($gejala as $data_gejala) {
+                            echo "
+                                <tr>
+                                  <th class=\"col-md-2 text-center\" scope=\"row\">" . $i . "</th>
+                                  <td class=\"col-md-5 text-center\">" . $data_gejala["kd_gejala"] . "</td>
+                                  <td class=\"col-md-5\">" . $data_gejala["nama_gejala"] . "</td>
+                                </tr>
+                                ";
+                            $i++;
+                          }
+                        ?>
+                      </tbody>
                     </table>
                     <!-- End Default Table Example -->
                   </div>
@@ -169,6 +171,16 @@ require '../functions.php';
 
   <!-- Template Main JS File -->
   <script src="../../assets/user/js/main.js"></script>
+  <script src="../../assets/admin/js/jquery-1.11.1.min.js"></script>
+
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready( function () {
+        $('#tb_info_penyakit').DataTable();
+        $('#tb_info_gejala').DataTable();
+    } );
+  </script>
 
 </body>
 
